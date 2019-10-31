@@ -1,4 +1,5 @@
 const adminDAO = require("../services/DAO/adminDAO")
+const jwtService = require("../services/jwtService")
 
 
 class UserController{
@@ -14,13 +15,15 @@ class UserController{
         );
         
         this.userRouter.post("/addProduct",
+        jwtService.verifyToken,
         this.addProductDAO)
 
         this.userRouter.delete("/deleteProduct",
+        jwtService.verifyToken,
         this.deleteProduct)
 
     }
-    
+
     //GET ALL THE ROWS FROM DATABASE.
     getProductsFromDAO(req,res,next) {
         adminDAO.getAllProducts().then((products)=> {

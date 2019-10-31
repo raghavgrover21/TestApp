@@ -10,7 +10,7 @@ app.use("/api/v1",userRouter);
 
 const port = process.env.PORT || 8000;
 
-//calling controller
+//passing routing access to usercontroller class.(for sub routes)
 userController(userRouter);
 app.listen(port, err =>{
     if(err)

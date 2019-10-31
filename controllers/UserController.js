@@ -4,27 +4,32 @@ const adminDAO = require("../services/DAO/adminDAO")
 class UserController{
     constructor(userRouter)
     {
-        console.log("reached here1");
         this.userRouter = userRouter;
         this.registerRouter();
     }
     registerRouter(){
+        
         this.userRouter.get("/products",
         this.getProductsFromDAO
         );
+        
         this.userRouter.post("/addProduct",
-        this.addProduct)
-        console.log("reached here2 ");
+        this.addProductDAO)
+
+        this.userRouter.delete("/deleteProduct",
+        this.deleteProduct)
 
     }
+    
     //GET ALL THE ROWS FROM DATABASE.
-    getProductsFromDAO(req,res,next){
-        adminDAO.getAllProducts().then((products)=>{
+    getProductsFromDAO(req,res,next) {
+        adminDAO.getAllProducts().then((products)=> {
             res.send(products);
         })
         }
+
     //ADD ANOTHER PRODUCT INTO THE DATABASE WHICH CAN ONLY BE DONE BY ADMIN    
-    addProduct(req,res,next){
+    addProductDAO(req,res,next) {
         let product = {
             name : req.body.name,
             price : req.body.price
@@ -36,6 +41,18 @@ class UserController{
                 console.log(err)
                 res.send("unable to insert into the database");
             })
+    }
+
+    //DELETE FROM PRODUCT TABLE
+    deleteProduct(req,res,next) {
+        let productId = req.body.id;
+
+        adminDAO.deleteProduct(productId).then(()=>{
+            res.send("record deleted successfully");
+        }).catch(err =>{
+            console.log(err);
+            res.send("unable to delete the record");
+        })
     }
     }
 const userController = userRouter => {

@@ -1,0 +1,2 @@
+holds a jwt token encoded with the given secret key
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6InRlc3RVc2VyIn0sImlhdCI6MTU3MjU1NDI5NH0.DnoEIB9YM16oYzgxdSU0VWv4i0-2IBudWiZDHcPyEjc
